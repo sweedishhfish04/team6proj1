@@ -1,0 +1,4 @@
+.food-elem:hover {
+    color: blue;
+    cursor: pointer;
+}
