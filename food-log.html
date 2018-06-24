@@ -11,15 +11,33 @@
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
 </head>
 
-<body>
+<body class="p-2">
+    <div id="quantity"></div>
+    <h1 class="text-center">My Food Log</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Food Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Calories</th>
+                <th scope="col">Protein</th>
+                <th scope="col">Fat</th>
+                <th scope="col">Carbs</th>
+                <th scope="col">Sugar</th>
+            </tr>
+        </thead>
+        <tbody id="log-tbl">
+
+        </tbody>
+    </table>
     <form>
-        <div class="form-group p-2">
+        <div class="form-group">
             <label for="food-entry">Search for a food to log:</label>
             <input type="text" class="form-control" id="food-entry" placeholder="e.g. baked potato">
             <button type="submit" id="submit" class="btn btn-primary my-2">Submit</button>
         </div>
     </form>
-    <h3 class="p-2">Search Results:</h3>
+    <h3>Search Results:</h3>
     <br>
     <table class="table">
         <thead>
@@ -28,7 +46,7 @@
                 <th scope="col">Manufacturer ("none" if raw ingredient)</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="search-tbl">
 
         </tbody>
     </table>
