@@ -27,9 +27,11 @@ body{
         text-align: center;
         margin-bottom: 1.5rem
     }
+
     .food-elem:hover {
         color: blue;
         cursor: pointer;
     }
+
     
     
