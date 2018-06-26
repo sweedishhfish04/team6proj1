@@ -13,6 +13,9 @@ const sugarID = 269
 // Nutrient array
 const loggedNutrients = [caloriesID, proteinID, fatID, carbID, sugarID]
 
+// Nutrient totals (same order as logged nutrients)
+var nutrientTotal = [ 0, 0, 0, 0, 0 ]
+
 $("#submit").click((clickEvt) => {
     clickEvt.preventDefault();
     let food = $("#food-entry").val()
@@ -74,11 +77,22 @@ $("#submit").click((clickEvt) => {
                         for (let j = 0; j < nutrients.length; ++j) {
                             if (nutrients[j].nutrient_id == loggedNutrients[i]) {
                                 nutrientVal = quantity * nutrients[j].measures[0].value
-                                newRow.append($("<td>").text(nutrientVal + " " + nutrients[j].unit))
+                                nutrientTotal[i] += nutrientVal
+                                newRow.append($("<td>").text(nutrientVal + " " + nutrients[j].unit)) 
                             }
                         }
-                    }
+                    }                  
                     $("#log-tbl").append(newRow)
+                    let totalsRow = $("<tr>")
+                    let totalLabel = $("<td>").text("Nutritional totals:")
+                    let emptyField = $("<td>").text("---")
+                    totalsRow.append(totalLabel)
+                    totalsRow.append(emptyField)
+                    for (let k = 0; k < nutrientTotal.length; ++k) {
+                        totalsRow.append($("<td>").text(nutrientTotal[k]))
+                    }
+                    $("#log-tbl-totals").empty()
+                    $("#log-tbl-totals").append(totalsRow)
                     $("#quantity").empty()
                 })
             })
