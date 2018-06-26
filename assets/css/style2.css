@@ -1,0 +1,18 @@
+container{
+
+    width:956px;
+    border: 1px solid;
+    margin-bottom: 5px solid;
+}
+
+body{
+    background-color: lightgray;
+}
+
+h2{
+    text-align: center;
+}
+
+form{
+
+}

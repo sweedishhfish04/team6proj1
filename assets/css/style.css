@@ -1,0 +1,31 @@
+body{
+    background:lightgray;
+    position: relative;
+    }
+    
+    
+    .jumbotron {
+        position: relative;
+        background-color: #e8e8e8;
+        overflow: hidden;
+    }
+    
+    *, :after, :before {
+        box-sizing: inherit;
+    }
+    user agent stylesheet
+    div {
+        display: block;
+    }
+    
+    .section-header {
+        text-align: center;
+        margin-bottom: 1.5rem
+    }
+    
+    h2, p {
+        text-align: center;
+        margin-bottom: 1.5rem
+    }
+    
+    
