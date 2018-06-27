@@ -1,4 +1,15 @@
-// API access constants
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCWDvWJjIsTKnka9ydG0In9imp5QUkAbnA",
+    authDomain: "login-signup-3fe79.firebaseapp.com",
+    databaseURL: "https://login-signup-3fe79.firebaseio.com",
+    projectId: "login-signup-3fe79",
+    storageBucket: "login-signup-3fe79.appspot.com",
+    messagingSenderId: "495609033378"
+  };
+  firebase.initializeApp(config);
+  
+// USDA API access constants
 const apiKey = "PPZaLIjNkv3RxMDe5YUDrBG7Tt7VdpUOlXHCGxnk"
 const searchUrlBase = "https://api.nal.usda.gov/ndb/search/?format=json&"
 const foodReportUrlBase = "https://api.nal.usda.gov/ndb/V2/reports?ndbno="
@@ -15,6 +26,19 @@ const loggedNutrients = [caloriesID, proteinID, fatID, carbID, sugarID]
 
 // Nutrient totals (same order as logged nutrients)
 var nutrientTotal = [ 0, 0, 0, 0, 0 ]
+var nutrientTotalStr = new Array(nutrientTotal.length)
+
+// Get current user
+var currUserID = ""
+var fitDB = firebase.database()
+fitDB.ref("/currentUser").once("value", (currUsrSS) => {
+    if (currUsrSS && currUsrSS.val().userID != "") {
+        window.currUserID = currUsrSS.val().userID
+    }
+})
+
+// WA until login is working
+currUserID = "timsmith78"
 
 $("#submit").click((clickEvt) => {
     clickEvt.preventDefault();
@@ -51,14 +75,14 @@ $("#submit").click((clickEvt) => {
                 let nutrients = foodDbResponse.foods[0].food.nutrients
                 console.log(nutrients)
                 quantityDiv = $("#quantity")
-                quantityDiv.append($("<h3>").text("Enter Quantity:"))
+                quantityDiv.append($("<h3>").text("Enter Quantity: "))
                 quantityDiv.append($("<p>").text(foodDbResponse.foods[0].food.desc.name))
                 quantityDiv.append($("<input>") 
                     .attr("id", "qty")    
                     .attr("type", "text")
                     .attr("size", "5")
                     .attr("class", "d-inline"))
-                quantityDiv.append($("<p>").text(nutrients[0].measures[0].label)
+                quantityDiv.append($("<p>").text(" " + nutrients[0].measures[0].label + " ")
                     .attr("class", "d-inline"))
                 quantityDiv.append($("<button>").text("OK")
                     .attr("class", "d-inline")
@@ -78,7 +102,8 @@ $("#submit").click((clickEvt) => {
                             if (nutrients[j].nutrient_id == loggedNutrients[i]) {
                                 nutrientVal = quantity * nutrients[j].measures[0].value
                                 nutrientTotal[i] += nutrientVal
-                                newRow.append($("<td>").text(nutrientVal + " " + nutrients[j].unit)) 
+                                nutrientTotalStr[i] = nutrientTotal[i].toFixed(1) + " " + nutrients[j].unit
+                                newRow.append($("<td>").text(nutrientVal.toFixed(1) + " " + nutrients[j].unit)) 
                             }
                         }
                     }                  
@@ -88,15 +113,30 @@ $("#submit").click((clickEvt) => {
                     let emptyField = $("<td>").text("---")
                     totalsRow.append(totalLabel)
                     totalsRow.append(emptyField)
+                    var newRecord = {}
                     for (let k = 0; k < nutrientTotal.length; ++k) {
-                        totalsRow.append($("<td>").text(nutrientTotal[k]))
+                        totalsRow.append($("<td>").text(nutrientTotalStr[k]))
                     }
                     $("#log-tbl-totals").empty()
                     $("#log-tbl-totals").append(totalsRow)
                     $("#quantity").empty()
+                    $("#search-tbl").empty()
+                    $("#food-entry").val('')
                 })
             })
         })
     })
 
+})
+
+$("#doneBtn").click( () => {
+    var newDbEntry = {
+        calories: nutrientTotal[0],
+        protein: nutrientTotal[1],
+        fat: nutrientTotal[2],
+        carb: nutrientTotal[3],
+        sugar: nutrientTotal[4]
+    }
+
+    fitDB.ref("/" + currUserID + "/nutrition").set(newDbEntry)
 })
