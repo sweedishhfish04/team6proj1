@@ -8,6 +8,21 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
     crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD9CERKrba5PHCeS1in4L6yh1RjA9b1n5o",
+      authDomain: "full-fitness-d5c5c.firebaseapp.com",
+      databaseURL: "https://full-fitness-d5c5c.firebaseio.com",
+      projectId: "full-fitness-d5c5c",
+      storageBucket: "full-fitness-d5c5c.appspot.com",
+      messagingSenderId: "69235561484"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
 </head>
 
 <body>
@@ -19,9 +34,12 @@
         <a class="nav-link active" href="home.html">HOME</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Login/Signup</a>
+        <a class="nav-link" id="login-signup" href="#">Login/Signup</a>
       </li>
     </ul>
+
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
 
     <div class="jumbotron overlay-50">
       <picture class="hero-banner">
@@ -31,8 +49,7 @@
         <img id="motivational" alt="motivational" src="assets/images/motivational.jpg" width="50%" srcset="motivational.jpg" class="cq-dd-image">
         <p id="mission" width="50%">
           Mission Statment!
-          <br>
-          This is where our mission statment will go, It will be super awesome and not too long. We are the best!
+          <br> This is where our mission statment will go, It will be super awesome and not too long. We are the best!
 
         </p>
 
@@ -41,7 +58,9 @@
     <script type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    </script>
+    <script src="assets/javascript/project.js"></script>
+
+
 
 </body>
 
