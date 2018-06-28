@@ -1,14 +1,16 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyCWDvWJjIsTKnka9ydG0In9imp5QUkAbnA",
-    authDomain: "login-signup-3fe79.firebaseapp.com",
-    databaseURL: "https://login-signup-3fe79.firebaseio.com",
-    projectId: "login-signup-3fe79",
-    storageBucket: "login-signup-3fe79.appspot.com",
-    messagingSenderId: "495609033378"
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD9CERKrba5PHCeS1in4L6yh1RjA9b1n5o",
+    authDomain: "full-fitness-d5c5c.firebaseapp.com",
+    databaseURL: "https://full-fitness-d5c5c.firebaseio.com",
+    projectId: "full-fitness-d5c5c",
+    storageBucket: "full-fitness-d5c5c.appspot.com",
+    messagingSenderId: "69235561484"
   };
   firebase.initializeApp(config);
-  
+
+var fitDB = firebase.database()
+
 // USDA API access constants
 const apiKey = "PPZaLIjNkv3RxMDe5YUDrBG7Tt7VdpUOlXHCGxnk"
 const searchUrlBase = "https://api.nal.usda.gov/ndb/search/?format=json&"
@@ -25,20 +27,10 @@ const sugarID = 269
 const loggedNutrients = [caloriesID, proteinID, fatID, carbID, sugarID]
 
 // Nutrient totals (same order as logged nutrients)
-var nutrientTotal = [ 0, 0, 0, 0, 0 ]
+var nutrientTotal = [0, 0, 0, 0, 0]
 var nutrientTotalStr = new Array(nutrientTotal.length)
 
-// Get current user
-var currUserID = ""
-var fitDB = firebase.database()
-fitDB.ref("/currentUser").once("value", (currUsrSS) => {
-    if (currUsrSS && currUsrSS.val().userID != "") {
-        window.currUserID = currUsrSS.val().userID
-    }
-})
-
-// WA until login is working
-currUserID = "timsmith78"
+var currUserID = "timsmith78"
 
 $("#submit").click((clickEvt) => {
     clickEvt.preventDefault();
@@ -64,21 +56,21 @@ $("#submit").click((clickEvt) => {
             $("#search-tbl").append(newRow)
         }
 
-        $(".food-elem").click( (clickEvt) => {
+        $(".food-elem").click((clickEvt) => {
             let ndbnoKey = $(clickEvt.target).attr("ndbno")
 
             $.ajax({
                 url: foodReportUrlBase + ndbnoKey + "&api_key=" + apiKey,
                 method: "GET"
-            }).then( (foodDbResponse) => {
+            }).then((foodDbResponse) => {
                 console.log(foodDbResponse)
                 let nutrients = foodDbResponse.foods[0].food.nutrients
                 console.log(nutrients)
                 quantityDiv = $("#quantity")
                 quantityDiv.append($("<h3>").text("Enter Quantity: "))
                 quantityDiv.append($("<p>").text(foodDbResponse.foods[0].food.desc.name))
-                quantityDiv.append($("<input>") 
-                    .attr("id", "qty")    
+                quantityDiv.append($("<input>")
+                    .attr("id", "qty")
                     .attr("type", "text")
                     .attr("size", "5")
                     .attr("class", "d-inline"))
@@ -87,8 +79,8 @@ $("#submit").click((clickEvt) => {
                 quantityDiv.append($("<button>").text("OK")
                     .attr("class", "d-inline")
                     .attr("id", "okBtn"))
-                window.scrollTo(0,0)
-                $("#okBtn").click( (okEvt) => {
+                window.scrollTo(0, 0)
+                $("#okBtn").click((okEvt) => {
                     okEvt.preventDefault()
                     let newRow = $("<tr>")
                     let name = $("<td>").text(foodDbResponse.foods[0].food.desc.name)
@@ -103,10 +95,10 @@ $("#submit").click((clickEvt) => {
                                 nutrientVal = quantity * nutrients[j].measures[0].value
                                 nutrientTotal[i] += nutrientVal
                                 nutrientTotalStr[i] = nutrientTotal[i].toFixed(1) + " " + nutrients[j].unit
-                                newRow.append($("<td>").text(nutrientVal.toFixed(1) + " " + nutrients[j].unit)) 
+                                newRow.append($("<td>").text(nutrientVal.toFixed(1) + " " + nutrients[j].unit))
                             }
                         }
-                    }                  
+                    }
                     $("#log-tbl").append(newRow)
                     let totalsRow = $("<tr>")
                     let totalLabel = $("<td>").text("Nutritional totals:")
@@ -129,7 +121,7 @@ $("#submit").click((clickEvt) => {
 
 })
 
-$("#doneBtn").click( () => {
+$("#doneBtn").click(() => {
     var newDbEntry = {
         calories: nutrientTotal[0],
         protein: nutrientTotal[1],
@@ -138,5 +130,7 @@ $("#doneBtn").click( () => {
         sugar: nutrientTotal[4]
     }
 
-    fitDB.ref("/" + currUserID + "/nutrition").set(newDbEntry)
+    fitDB.ref("/users/" + currUserID + "/nutrition").set(newDbEntry).then( () => {
+        window.location.href = "personal.html"
+    })
 })

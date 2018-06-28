@@ -45,12 +45,33 @@
         <p>Discover all the ways you can help boost your body’s performance or maintain ideal weight for a healthy lifestyle
           to love.</p>
         <br>
-        <div id="food-intake">
-          <h3>Click here to log today's food intake</h3>
-          <form method="POST" action="food-log.html">
-            <button type="submit">Go To Food Log</button>
-          </form>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5">
+              <h3 class="text-center"><u>Your Goals</u></h3>
+              <div id="goals"></div>
+            </div>
+            <div class="col-md-5">
+              <h3 class="text-center"><u>Today's Progress</u></h3>
+              <div id="progress-graph"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <h3 class="text-center"><u>Food Log</u></h3>
+              <div id="food-intake">
+                <p class="text-center">Click below to log today's food intake to compare with your goals:</p>
+                <form class="text-center" method="POST" action="food-log.html">
+                  <button class="btn btn-primary p-2" type="submit">Go To Food Log</button>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <h3 class="text-center"><u>Workout</u></h3>
+            </div>
+          </div>
         </div>
+
       </div>
 
     </div>
@@ -65,6 +86,7 @@
       crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
       crossorigin="anonymous"></script>
+    
 </body>
 
 </html>
