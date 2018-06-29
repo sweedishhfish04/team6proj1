@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>NYT Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .form-group {
+            width: 10%;
+        }
+
+        .box1 {
+            margin-left: 50px;
+        }
+
+        .box2 {
+            margin-left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Maintain Your Weight. Feel Better!</h1>
+
+        </div>
+    </div>
+
+    <div class="box1">
+        <form>
+            <div id="goals" class="form-group">
+                <label for="formGroupExampleInput">YOUR GOALS</label>
+                <select name="cars">
+                    <option value="gain">Gain 2lbs per week</option>
+                    <option value="gain">Gain 1.5lbs per week</option>
+                    <option value="gain">Gain 1lbs per week</option>
+                    <option value="gain">Gain 0.5lbs per week</option>
+                    <option value="maintain">Maintian my current weight</option>
+                    <option value="lose">Lose 0.5lbs per week</option>
+                    <option value="lose">Lose 1lbs per week</option>
+                    <option value="lose">Lose 1.5lbs per week</option>
+                    <option value="lose">Lose 2lbs per week</option>
+                </select>
+
+
+
+
+
+
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">AGE</label>
+                <input type="text" class="form-control" id="age" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">GENDER</label>
+                <select name="GENDER" id="gender">
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="prefernottosay">Prefer not to say</option>
+
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">WEIGHT</label>
+                <input type="text" class="form-control" id="weight" placeholder="">
+            </div>
+
+            <div class="form-group">
+                <label for="formGroupExampleInput2">HEIGHT</label>
+                <input type="text" class="form-control" id="height" placeholder="">
+            </div>
+
+
+
+        </form>
+        <button type="button" class="btn btn-primary btn-sm" id="submit"> SUBMIT </button>
+
+    </div>
+
+    <br>
+    <br>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script type="text/javascript" src="goalPage.js"></script>
+</body>
+</html>
