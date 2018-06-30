@@ -1,13 +1,13 @@
-  // Initialize Firebase
-  var config = {
+// Initialize Firebase
+var config = {
     apiKey: "AIzaSyD9CERKrba5PHCeS1in4L6yh1RjA9b1n5o",
     authDomain: "full-fitness-d5c5c.firebaseapp.com",
     databaseURL: "https://full-fitness-d5c5c.firebaseio.com",
     projectId: "full-fitness-d5c5c",
     storageBucket: "full-fitness-d5c5c.appspot.com",
     messagingSenderId: "69235561484"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
 var fitDB = firebase.database()
 
@@ -29,8 +29,6 @@ const loggedNutrients = [caloriesID, proteinID, fatID, carbID, sugarID]
 // Nutrient totals (same order as logged nutrients)
 var nutrientTotal = [0, 0, 0, 0, 0]
 var nutrientTotalStr = new Array(nutrientTotal.length)
-
-var currUserID = "timsmith78"
 
 $("#submit").click((clickEvt) => {
     clickEvt.preventDefault();
@@ -121,16 +119,35 @@ $("#submit").click((clickEvt) => {
 
 })
 
-$("#doneBtn").click(() => {
-    var newDbEntry = {
-        calories: nutrientTotal[0],
-        protein: nutrientTotal[1],
-        fat: nutrientTotal[2],
-        carb: nutrientTotal[3],
-        sugar: nutrientTotal[4]
-    }
+// Get logged-in user
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+        var currentUserID = user.email.substr(0, user.email.length - 4) // This will be used as a Firebase DB path, and it doesn't like dots
+        fitDB.ref("/users/" + currentUserID + "/nutrition").once("value", (initFitLog) => {
+            nutrientTotal[0] = initFitLog.val().calories;
+            nutrientTotal[1] = initFitLog.val().protein;
+            nutrientTotal[2] = initFitLog.val().fat;
+            nutrientTotal[3] = initFitLog.val().carb;
+            nutrientTotal[4] = initFitLog.val().sugar;
+        })
+        $("#doneBtn").click(() => {
+            var newDbEntry = {
+                calories: nutrientTotal[0],
+                protein: nutrientTotal[1],
+                fat: nutrientTotal[2],
+                carb: nutrientTotal[3],
+                sugar: nutrientTotal[4]
+            }
 
-    fitDB.ref("/users/" + currUserID + "/nutrition").set(newDbEntry).then( () => {
-        window.location.href = "personal.html"
-    })
+            fitDB.ref("/users/" + currentUserID + "/nutrition").set(newDbEntry).then(() => {
+                window.location.href = "personal.html"
+            })
+        })
+
+    } else {
+        // No user is signed in.
+        $(body).empty()
+        $(body).html("No user signed in.  Please click 'Back' to return to the home page to sign in")
+    }
 })
