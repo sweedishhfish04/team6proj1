@@ -15,7 +15,10 @@
     
     <ul class="nav justify-content-center"><img src="assets/images/img.jpg" alt="Smiley face" height="90px" width="90px">
         <li class="nav-item">
-          <a class="nav-link active" href="#">HOME</a>
+          <a class="nav-link active" href="home.html">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="goalpage.html">GOALS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="food-log.html">NUTRITION</a>
@@ -24,7 +27,7 @@
           <a class="nav-link active" href="workout.html">WORKOUT</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login-firebase.html">LOGOUT</a>
+          <a class="nav-link" id="logout" href="">LOGOUT</a>
         </li>
       </ul>
 
@@ -39,7 +42,13 @@
               <h1 class="h3 section-header">Health &amp; Wellness</h1>
               <h2 class="h1">Create Your Healthiest Life</h2>
               <p>Discover all the ways you can help boost your body’s performance or maintain ideal weight for a healthy lifestyle to love.</p>
-              
+              <hr>
+              <h3 class="h3 text-center">My Goals Today</h3>
+              <div id="goal-stmt" class="text-center"></div>
+              <hr>
+              <h3 class="h3 text-center">My Progress So Far Today</h3>
+              <div id="progress"></div>
+              <canvas id="prog-chart" width="400" height="400"></canvas>
               </div>
        
        </div> 
@@ -50,5 +59,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    
+    <!-- Non optional scripts here -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="assets/javascript/app.js"></script>
   </body>
 </html>

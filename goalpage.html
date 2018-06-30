@@ -38,23 +38,17 @@
         <form>
             <div id="goals" class="form-group">
                 <label for="formGroupExampleInput">YOUR GOALS</label>
-                <select name="cars">
-                    <option value="gain">Gain 2lbs per week</option>
-                    <option value="gain">Gain 1.5lbs per week</option>
-                    <option value="gain">Gain 1lbs per week</option>
-                    <option value="gain">Gain 0.5lbs per week</option>
-                    <option value="maintain">Maintian my current weight</option>
-                    <option value="lose">Lose 0.5lbs per week</option>
-                    <option value="lose">Lose 1lbs per week</option>
-                    <option value="lose">Lose 1.5lbs per week</option>
-                    <option value="lose">Lose 2lbs per week</option>
+                <select name="cars" id="lb-delta">
+                    <option value="2">Gain 2lbs per week</option>
+                    <option value="1.5">Gain 1.5lbs per week</option>
+                    <option value="1">Gain 1lbs per week</option>
+                    <option value=".5">Gain 0.5lbs per week</option>
+                    <option value="0">Maintian my current weight</option>
+                    <option value="-.5">Lose 0.5lbs per week</option>
+                    <option value="-1">Lose 1lbs per week</option>
+                    <option value="-1.5">Lose 1.5lbs per week</option>
+                    <option value="-2">Lose 2lbs per week</option>
                 </select>
-
-
-
-
-
-
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2">AGE</label>
@@ -70,12 +64,12 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput2">WEIGHT</label>
+                <label for="formGroupExampleInput2">WEIGHT (pounds)</label>
                 <input type="text" class="form-control" id="weight" placeholder="">
             </div>
 
             <div class="form-group">
-                <label for="formGroupExampleInput2">HEIGHT</label>
+                <label for="formGroupExampleInput2">HEIGHT (inches)</label>
                 <input type="text" class="form-control" id="height" placeholder="">
             </div>
 
